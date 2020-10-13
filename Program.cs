@@ -12,7 +12,8 @@ namespace ExcelPass
         static int Main(string[] args)
         {
             Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            var conf = new ExcelReaderConfiguration { Password = "123456" };
+            string pass = args.Length > 0 ? args[0] : "123456";
+            var conf = new ExcelReaderConfiguration { Password = pass };
             NumberFormatInfo nfi = new NumberFormatInfo
             {
                 NumberDecimalSeparator = "."
@@ -20,7 +21,7 @@ namespace ExcelPass
 
             try
             {
-                ExcelTest(@"C:\Users\dusko\Desktop\secretExcelFile.xlsx", @"C:\Users\dusko\Desktop\wellKnownSecrets.csv", ';', conf, nfi);
+                ExcelTest(@"..\..\..\secretExcelFile.xlsx", @"..\..\..\wellKnownSecrets.csv", ';', conf, nfi);
             }
             catch (ExcelDataReader.Exceptions.InvalidPasswordException e)
             {
